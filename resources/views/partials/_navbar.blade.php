@@ -5,7 +5,6 @@
             <img src="{{ asset('images/LogoMeow.png') }}" class="h-14 md:h-16 drop-shadow-lg" alt="Logo de Meow Café & Bistro">
         </a>
 
-        {{-- Contenedor de la Píldora de Navegación (Solo para Escritorio) --}}
         <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
              <div class="bg-white/20 backdrop-blur-lg rounded-full shadow-lg border border-white/30 p-2">
                 <ul class="flex items-center space-x-2" style="font-family: 'Nunito', sans-serif;">
@@ -16,20 +15,22 @@
                         <a href="{{ url('/#menu') }}" class="block py-2 px-4 rounded-full text-gray-800 transition-colors duration-300 hover:bg-white/50">Menú</a>
                     </li>
                     <li>
-                        <a href="{{ url('/nuestro-equipo') }}" class="block py-2 px-4 rounded-full transition-colors duration-300 {{ request()->is('nuestro-equipo') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Nuestro Equipo</a>
+                        <a href="{{ url('/#ubicacion') }}" class="block py-2 px-4 rounded-full transition-colors duration-300 {{ request()->is('galeria') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Ubicación</a>
                     </li>
                     <li>
-                        <a href="{{ url('/galeria') }}" class="block py-2 px-4 rounded-full transition-colors duration-300 {{ request()->is('galeria') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Galería</a>
+                        <a href="{{ url('/sobre-nosotros') }}" class="block py-2 px-4 rounded-full transition-colors duration-300 {{ request()->is('sobre-nosotros') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Sobre nosotros</a>
                     </li>
+                    {{-- <li>
+                        <a href="{{ url('/galeria') }}" class="block py-2 px-4 rounded-full transition-colors duration-300 {{ request()->is('galeria') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Galería</a>
+                    </li> --}}
                 </ul>
             </div>
         </div>
 
-        {{-- Botón de Adopción (Escritorio) y Hamburguesa (Móvil) --}}
         <div class="flex items-center space-x-3 z-10">
-            <a href="{{ url('/domicilio') }}" class="hidden md:block py-3 px-5 text-center font-bold text-white bg-[#fca8c2] rounded-full transition-all duration-300 hover:bg-[#f37a9c] hover:scale-105 shadow-md">
+            {{-- <a href="{{ url('/domicilio') }}" class="hidden md:block py-3 px-5 text-center font-bold text-white bg-[#fca8c2] rounded-full transition-all duration-300 hover:bg-[#f37a9c] hover:scale-105 shadow-md">
                 Pide a domicilio 🛵
-            </a>
+            </a> --}}
             <a href="{{ url('/adopcion') }}" class="hidden md:block py-3 px-5 text-center font-bold text-white bg-[#fca8c2] rounded-full transition-all duration-300 hover:bg-[#bb95ae] hover:scale-105 shadow-md">
                 ¡Adopta! ❤️
             </a>
@@ -42,9 +43,10 @@
         </div>
     </div>
 
-    {{-- Menú Desplegable para Móvil --}}
     <div class="hidden w-full md:hidden" id="navbar-mobile-menu">
         <div class="mt-4 bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-4">
+            
+            {{-- Lista de navegación principal --}}
             <ul class="flex flex-col space-y-2 font-medium" style="font-family: 'Nunito', sans-serif;">
                 <li>
                     <a href="{{ url('/') }}" class="block py-3 px-4 text-center rounded-lg {{ request()->is('/') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Inicio</a>
@@ -53,39 +55,57 @@
                     <a href="{{ url('/#menu') }}" class="block py-3 px-4 text-center text-gray-800 rounded-lg hover:bg-white/50">Menú</a>
                 </li>
                 <li>
-                    <a href="{{ url('/nuestro-equipo') }}" class="block py-3 px-4 text-center rounded-lg {{ request()->is('nuestro-equipo') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Nuestro Equipo</a>
+                    <a href="{{ url('/#ubicacion') }}" class="block py-3 px-4 text-center text-gray-800 rounded-lg hover:bg-white/50">Ubicación</a>
                 </li>
                 <li>
-                    <a href="{{ url('/galeria') }}" class="block py-3 px-4 text-center rounded-lg {{ request()->is('galeria') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Galería</a>
-                </li>
-                <li>
-                    <a href="{{ url('/domicilio') }}" class="block py-3 px-4 text-center font-bold text-white bg-[#fca8c2] rounded-lg hover:bg-[#f37a9c]">
-                        Pide a domicilio 🛵
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/adopcion') }}" class="block mt-2 py-3 px-4 text-center font-bold text-white bg-[#fca8c2] rounded-lg hover:bg-[#bb95ae]">
-                        ¡Adopta! ❤️
-                    </a>
+                    <a href="{{ url('/sobre-nosotros') }}" class="block py-3 px-4 text-center rounded-lg {{ request()->is('sobre-nosotros') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Sobre nosotros</a>
                 </li>
             </ul>
+
+            {{-- Línea divisoria para separar la acción principal --}}
+            <hr class="my-4 border-white/30">
+
+            {{-- Botón de acción principal "Adopta" --}}
+            <div>
+                <a href="{{ url('/adopcion') }}" class="block py-3 px-4 text-center font-bold text-white bg-[#fca8c2] rounded-lg hover:bg-[#bb95ae] transition-colors duration-300 shadow-md">
+                    ¡Adopta! ❤️
+                </a>
+            </div>
+
         </div>
     </div>
 </nav>
 
-{{-- Script para el scroll suave (si lo necesitas) --}}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('a[href$="/#menu"]').forEach(anchor => {
+    // --- Lógica para scroll suave (sin cambios) ---
+    document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            // Solo previene el comportamiento si estamos en la página de inicio
             if (window.location.pathname === '/') {
                 e.preventDefault();
-                const targetElement = document.getElementById('menu');
+                const targetId = this.getAttribute('href').substring(2);
+                const targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
             }
+            // Si no estamos en la página de inicio, el enlace funcionará normalmente (e.g., /sobre-nosotros -> /#menu)
         });
+    });
+
+    // --- NUEVA LÓGICA: Cerrar menú móvil al hacer clic afuera ---
+    const mobileMenu = document.getElementById('navbar-mobile-menu');
+    const toggleButton = document.querySelector('[data-collapse-toggle="navbar-mobile-menu"]');
+
+    document.addEventListener('click', function(event) {
+        // Si el menú está visible Y el clic NO fue en el botón Y el clic NO fue dentro del menú
+        if (!mobileMenu.classList.contains('hidden') && !toggleButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+            // Ocultamos el menú
+            mobileMenu.classList.add('hidden');
+            // Actualizamos el estado ARIA del botón por accesibilidad
+            toggleButton.setAttribute('aria-expanded', 'false');
+        }
     });
 });
 </script>
