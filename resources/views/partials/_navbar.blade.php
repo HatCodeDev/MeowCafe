@@ -46,7 +46,6 @@
     <div class="hidden w-full md:hidden" id="navbar-mobile-menu">
         <div class="mt-4 bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-4">
             
-            {{-- Lista de navegación principal --}}
             <ul class="flex flex-col space-y-2 font-medium" style="font-family: 'Nunito', sans-serif;">
                 <li>
                     <a href="{{ url('/') }}" class="block py-3 px-4 text-center rounded-lg {{ request()->is('/') ? 'bg-[#fca8c2] text-white' : 'text-gray-800 hover:bg-white/50' }}">Inicio</a>
@@ -62,10 +61,8 @@
                 </li>
             </ul>
 
-            {{-- Línea divisoria para separar la acción principal --}}
             <hr class="my-4 border-white/30">
 
-            {{-- Botón de acción principal "Adopta" --}}
             <div>
                 <a href="{{ url('/adopcion') }}" class="block py-3 px-4 text-center font-bold text-white bg-[#fca8c2] rounded-lg hover:bg-[#bb95ae] transition-colors duration-300 shadow-md">
                     ¡Adopta! ❤️
@@ -78,10 +75,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Lógica para scroll suave (sin cambios) ---
     document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            // Solo previene el comportamiento si estamos en la página de inicio
             if (window.location.pathname === '/') {
                 e.preventDefault();
                 const targetId = this.getAttribute('href').substring(2);
@@ -90,20 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
             }
-            // Si no estamos en la página de inicio, el enlace funcionará normalmente (e.g., /sobre-nosotros -> /#menu)
         });
     });
 
-    // --- NUEVA LÓGICA: Cerrar menú móvil al hacer clic afuera ---
     const mobileMenu = document.getElementById('navbar-mobile-menu');
     const toggleButton = document.querySelector('[data-collapse-toggle="navbar-mobile-menu"]');
 
     document.addEventListener('click', function(event) {
-        // Si el menú está visible Y el clic NO fue en el botón Y el clic NO fue dentro del menú
         if (!mobileMenu.classList.contains('hidden') && !toggleButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-            // Ocultamos el menú
             mobileMenu.classList.add('hidden');
-            // Actualizamos el estado ARIA del botón por accesibilidad
             toggleButton.setAttribute('aria-expanded', 'false');
         }
     });

@@ -15,31 +15,33 @@
             <p class="text-lg text-gray-500 mt-2">Novedades, eventos y promociones especiales para ti.</p>
         </div>
 
+        @if($banners->isNotEmpty())
         <div id="default-carousel" class="relative w-full" data-carousel="slide">
             <div class="relative h-56 overflow-hidden rounded-2xl shadow-xl md:h-[400px] lg:h-[450px]">
-                
-                <div class="duration-700 ease-in-out" data-carousel-item>
-                    <picture>
-                        <source media="(min-width: 768px)" srcset="{{ asset('images/escritorio1.png') }}">
-                        <img src="{{ asset('images/movil1.png') }}"  alt="Promoción especial de Meow Café & Bistro">
-                    </picture>
-                </div>
 
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <picture>
-                        <source media="(min-width: 768px)" srcset="{{ asset('images/escritorio2.png') }}">
-                        <img src="{{ asset('images/movil2.png') }}" alt="Nuevo gatito en adopción">
-                    </picture>
-                </div>
+                @foreach($banners as $banner)
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        @if($banner->link)
+                            <a href="{{ $banner->link }}" target="_blank" rel="noopener noreferrer">
+                        @endif
 
-                
-                
+                        <picture>
+                            <source media="(min-width: 768px)" srcset="{{ Storage::url($banner->image_desktop) }}">
+                            <img src="{{ Storage::url($banner->image_mobile) }}" alt="Promoción Meow Café">
+                        </picture>
+
+                        @if($banner->link)
+                            </a>
+                        @endif
+                    </div>
+                @endforeach
+
             </div>
 
             <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                <button type="button" class="w-3 h-3 rounded-full bg-white/50" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                <button type="button" class="w-3 h-3 rounded-full bg-white/50" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                <button type="button" class="w-3 h-3 rounded-full bg-white/50" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                @foreach($banners as $index => $banner)
+                    <button type="button" class="w-3 h-3 rounded-full bg-white/50" aria-current="{{ $loop->first ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}" data-carousel-slide-to="{{ $index }}"></button>
+                @endforeach
             </div>
 
             <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
@@ -59,6 +61,7 @@
                 </span>
             </button>
         </div>
+        @endif
 
     </div>
 </section>
